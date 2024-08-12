@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   contact.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdaignea <gdaignea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/07 17:00:08 by gdaignea          #+#    #+#             */
-/*   Updated: 2024/08/08 18:32:30 by gdaignea         ###   ########.fr       */
+/*   Updated: 2024/08/10 15:51:34 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "contact.hpp"
 
-//constructor
+//constructor && destructor
 Contact::Contact(void) {}
-
-//destructor
 Contact::~Contact(void) {}
 
 //GETTERS
@@ -36,7 +34,7 @@ std::string	Contact::getPhoneNumber(void) const {
 }
 
 std::string	Contact::getDarkestSecret(void) const {
-	return (this->_phoneNumber);
+	return (this->_darkestSecret);
 }
 
 

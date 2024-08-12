@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gdaignea <gdaignea@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 15:28:02 by gdaignea          #+#    #+#             */
-/*   Updated: 2024/08/08 18:28:24 by gdaignea         ###   ########.fr       */
+/*   Updated: 2024/08/12 15:41:45 by gautier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,21 +27,23 @@ int	main(void) {
 
 	PhoneBook	phonebook;
 	std::string	input;
-	int			i = 0;
+	int			index = 0;
+	phonebook.nb_contact = 0;
+	
 
-	while (1) {
-		std::cout << "Welcome to your awesome phonebook. Please enter a command (ADD, SEARCH or EXIT): ";
+	std::cout << std::endl << CYAN << "HELLO FRIEND ! WELCOME TO YOUR AWESOME PHONEBOOK" << RESET 
+				<< std::endl << std::endl;
+	while (input.compare("EXIT") != 0) {
+		std::cout << MAGENTA << "Please enter a command (ADD, SEARCH or EXIT) : " << RESET;
 		std::getline(std::cin, input);
-
 		if (input.compare("ADD") == 0) {
-			phonebook.add_contact(i % 8);
-			i++;
+			if (phonebook.nb_contact < 8)
+				phonebook.nb_contact++;
+			phonebook.add_contact(index % 8);
+			index++;
 		}
 		else if (input.compare("SEARCH") == 0) {
 			phonebook.display_contact();
-		}
-		else if (input.compare("EXIT") == 0) {
-			return (0);
 		}
 	}
 	return (0);
