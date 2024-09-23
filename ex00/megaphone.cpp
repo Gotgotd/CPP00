@@ -6,7 +6,7 @@
 /*   By: gdaignea <gdaignea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/05 10:45:26 by gdaignea          #+#    #+#             */
-/*   Updated: 2024/08/05 11:38:17 by gdaignea         ###   ########.fr       */
+/*   Updated: 2024/08/19 11:32:14 by gdaignea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,8 @@ int	main(int ac, char **av) {
 
 	if (ac > 1) {
 		for (i = 1; av[i]; i++) {
-			for (int j = 0; av[i][j]; j++) {
-				av[i][j] = to_upper(av[i][j]);
-			}
-			std::cout << av[i];
+			for (int j = 0; av[i][j]; j++)
+				std::cout << to_upper(av[i][j]);
 		}
 		std::cout << std::endl;
 	}

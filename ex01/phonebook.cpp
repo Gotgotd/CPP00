@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   phonebook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gautier <gautier@student.42.fr>            +#+  +:+       +#+        */
+/*   By: gdaignea <gdaignea@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/06 17:13:04 by gdaignea          #+#    #+#             */
-/*   Updated: 2024/08/12 15:39:52 by gautier          ###   ########.fr       */
+/*   Updated: 2024/09/23 11:19:27 by gdaignea         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <limits>
+#include <sstream>
 #include "phonebook.hpp"
+#include <cstdlib>
 
 //constructor && destructor
 PhoneBook::PhoneBook(void) {}
@@ -19,10 +22,16 @@ PhoneBook::~PhoneBook(void) {}
 std::string	add_entry(std::string field, int flag) {
 
 	std::string	input;
+	bool		check_entry = true;
 
-	while (input.empty()) {
+	while (input.empty() && check_entry) {
 		std::cout << field;
 		std::getline(std::cin, input);
+		if (std::cin.fail()) {
+			check_entry = false;
+			std::cout << "Error : entry is closed. Please relaunch your phonebook" << std::endl;
+			exit(1);
+		}
 		if (input.empty())
 			std::cout << "field cannot be empty" << std::endl;
 		if (flag == 1) {
@@ -70,22 +79,44 @@ void	PhoneBook::display_contact_sheet(int index) {
 	}
 }
 
+int	ft_atoi(const std::string& str) {
+
+	std::stringstream ss(str);
+	int result;
+	
+	ss >> result;
+	return result;
+}
+
 void	PhoneBook::get_contact_sheet(void) {
 
 	std::string	input;
+	int			index;
+	bool		check_entry = true;
 
-	while (input.empty()) {
+	while (input.empty() && check_entry) {
 		std::cout << "Enter index number to display the contact : ";
 		std::getline(std::cin, input);
+		index = ft_atoi(input);
+		if (std::cin.fail()) {
+			check_entry = false;
+			std::cout << "Error : entry is closed. Please relaunch your phonebook" << std::endl;
+			exit(1);
+		}
 		if (input.empty() || !is_digit(input)) {
 			std::cout << RED << "please enter an index number" << RESET << std::endl;
 			return get_contact_sheet();
 		}
+		else if (!(index > 0 && index <= nb_contact)) {
+			std::cout << RED << "no contact for this index" << RESET << std::endl;
+			return get_contact_sheet();
+		}
 		else {
-			display_contact_sheet(std::stoi(input));
+			display_contact_sheet(ft_atoi(input));
 		}
 	}
 }
+
 
 void PhoneBook::display_contact(void) {
 
